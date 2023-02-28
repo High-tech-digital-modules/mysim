@@ -36,7 +36,7 @@ apt install cmake git make arm-none-eabi-gcc
 ### Build 
 - for the stm32f4 platform
 ```shell
-mkdir build-stmf32 && cd build-stmf32
+mkdir build-stm32f4 && cd build-stm32f4
 cmake ../ -DBOARD="stm32f4" -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-none-eabi.toolchain.cmake 
 make
 ```
