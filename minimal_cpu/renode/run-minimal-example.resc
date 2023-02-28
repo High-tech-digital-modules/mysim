@@ -1,0 +1,23 @@
+:name: STM32F4 Discovery Printf
+:description: This script runs the usart_printf example on stm32f4 discovery
+
+$name?="STM32F4_Discovery"
+$bin?=@minimal_cpu-d.elf
+
+# Create Machine & Load config
+mach create $name
+machine LoadPlatformDescription @minimal_cpu.repl
+logLevel -1
+
+# Create a terminal window showing the output of UART2
+showAnalyzer sysbus.usart2
+
+# Enable GDB
+machine StartGdbServer 3333
+
+macro reset
+"""
+    sysbus LoadELF $bin
+"""
+
+runMacro $reset
