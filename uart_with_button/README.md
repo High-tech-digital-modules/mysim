@@ -37,7 +37,7 @@ apt install cmake git make arm-none-eabi-gcc
 - for the stm32f4 platform
 ```shell
 mkdir build-stm32f4 && cd build-stm32f4
-cmake ../ -DBOARD="stm32f4" -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-none-eabi.toolchain.cmake 
+cmake ../ -DBOARD="stm32f4" -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-none-eabi.toolchain.cmake -DCMAKE_BUILD_TYPE=Debug
 make
 ```
 Final application is available in app-business-logic/uart_example.elf
@@ -88,7 +88,7 @@ in the second terminal copy elf to docker
 ```shell
 # check name by running: 
 docker ps
-docker cp build-stm32f4/app-business-logic/uart_example.elf <DOCKER_NAME>/opt/renode/
+docker cp build-stm32f4/app-business-logic/uart_example-d.elf <DOCKER_NAME>/opt/renode/
 ```
 
 Copy one important file for platform to be used later
@@ -101,7 +101,7 @@ Great lets go to monitor console copy without **(monitor)** and **(monitor-0)**
 ```shell
 (monitor) mach create
 (machine-0) machine LoadPlatformDescription @platforms/boards/stm32f4_discovery-kit.repl
-(machine-0) sysbus LoadELF @uart_example.elf
+(machine-0) sysbus LoadELF @uart_example-d.elf
 (machine-0) machine LoadPlatformDescription @add-ccm.repl
 (machine-0) showAnalyzer sysbus.uart2
 (machine-0) start
